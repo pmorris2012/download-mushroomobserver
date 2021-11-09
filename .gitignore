@@ -1,5 +1,5 @@
-images
-images/*
+mushroom_images
+mushroom_images/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

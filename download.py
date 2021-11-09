@@ -16,7 +16,7 @@ def download_url(url: str, save_dir: Path):
 
 
 def download(
-    save_dir: Optional[Path] = typer.Argument("images/"),
+    save_dir: Optional[Path] = typer.Argument("mushroom_images/"),
     processes: Optional[int] = typer.Option(8, "--processes", "-p"),
     tsv: Optional[Path] = typer.Option("mushrooms.tsv.gz", "--tsv")
     ):
