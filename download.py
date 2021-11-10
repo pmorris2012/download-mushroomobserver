@@ -17,7 +17,7 @@ def download_url(url: str, save_dir: Path):
     try:
         urlretrieve(url, str(save_path))
     except URLError as e:
-        print(filename, e.reason)
+        tqdm.write(filename, e.reason)
 
 
 def download(
