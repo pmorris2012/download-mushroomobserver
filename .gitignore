@@ -1,6 +1,7 @@
 mushroom_images
 mushroom_images/*
 *.tar.gz
+!mushrooms.tsv.gz
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
