@@ -23,4 +23,4 @@ def validate(
 
 
 if __name__ == "__main__":
-    typer.run(download)
+    typer.run(validate)
