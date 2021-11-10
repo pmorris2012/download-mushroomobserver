@@ -6,7 +6,7 @@ Thank you to [mushroomobserver.org](mushroomobserver.org) for making this data a
 
 More information can be found [here](https://mushroomobserver.org/articles/20).
 
-Rows in `mushrooms.tsv.gz`: **254,816**
+Rows in `mushrooms.tsv.gz`: **254,787**
 
 Unique Images: **254,650**
 
