@@ -2,6 +2,8 @@
 
 A dataset of paired mushroom images and genus/species nomenclature.
 
+The full dataset (containing `mushrooms.tsv.gz` and `mushroom_images/`) can be downloaded from [Google Drive](https://drive.google.com/file/d/1RfjX5nEGJNoTEVqaThxumBlm3-75IJR1/view?usp=sharing).
+
 Thank you to [mushroomobserver.org](mushroomobserver.org) for making this data available. 
 
 More information can be found [here](https://mushroomobserver.org/articles/20).
