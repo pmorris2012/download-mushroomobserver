@@ -4,20 +4,11 @@ from tqdm import tqdm
 import typer
 
 from functools import partial
-from multiprocessing import Pool
+import multiprocessing as mp
 from pathlib import Path
 from typing import Optional
 from urllib.error import URLError
 from urllib.request import urlretrieve
-
-
-def download_url(url: str, save_dir: Path):
-    filename = Path(url).name
-    save_path = Path(save_dir, filename)
-    try:
-        urlretrieve(url, str(save_path))
-    except URLError as e:
-        print(filename, e.reason)
 
 
 def download(
@@ -29,10 +20,39 @@ def download(
 
     data = read_csv(tsv, sep="\t", header=0)
     urls = data["url"].tolist()
+    total = len(urls)
 
-    pool = Pool(processes)
-    function = partial(download_url, save_dir=save_dir)
-    result = list(tqdm(pool.imap(function, urls), total=len(urls)))
+    def download_url(url: str):
+        filename = Path(url).name
+        save_path = Path(save_dir, filename)
+        try:
+            urlretrieve(url, str(save_path))
+            return 1
+        except URLError as e:
+            download_url.queue.put(url)
+        return 0
+
+    def pool_init(queue):
+        download_url.queue = queue
+
+    queue = mp.Queue()
+    pool = mp.Pool(processes, pool_init, [queue])
+
+    attempt = 1
+    found = 0
+    remaining = urls
+    while found < total:
+        found += sum(list(tqdm(
+            pool.imap(download_url, remaining), 
+            total=len(remaining),
+            desc=F"Attempt {attempt}"
+        )))
+
+        remaining = []
+        while not queue.empty():
+            remaining.append(q.get())
+        
+        attempt += 1
 
 
 if __name__ == "__main__":
