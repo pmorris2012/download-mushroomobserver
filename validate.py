@@ -14,6 +14,7 @@ def validate(
     drop_rows = []
     counter = 0
     for index, row in data.iterrows():
+        print(row)
         path = Path(save_dir, row['filename'])
         if not path.is_file():
             counter += 1
