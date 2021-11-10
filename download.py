@@ -1,4 +1,3 @@
-
 from pandas import read_csv
 from tqdm import tqdm
 import typer
@@ -11,6 +10,23 @@ from urllib.error import URLError
 from urllib.request import urlretrieve
 
 
+def download_url(args):
+    url, save_dir = args
+
+    filename = Path(url).name
+    save_path = Path(save_dir, filename)
+    try:
+        urlretrieve(url, str(save_path))
+        return 1
+    except URLError as e:
+        download_url.queue.put(args)
+    return 0
+
+
+def pool_init(queue):
+    download_url.queue = queue
+
+
 def download(
     save_dir: Optional[Path] = typer.Argument("mushroom_images/"),
     processes: Optional[int] = typer.Option(8, "--processes", "-p"),
@@ -19,21 +35,8 @@ def download(
     save_dir.mkdir(parents=True, exist_ok=True)
 
     data = read_csv(tsv, sep="\t", header=0)
-    urls = data["url"].tolist()
+    urls = [(url, save_dir) for url in data["url"]]
     total = len(urls)
-
-    def download_url(url: str):
-        filename = Path(url).name
-        save_path = Path(save_dir, filename)
-        try:
-            urlretrieve(url, str(save_path))
-            return 1
-        except URLError as e:
-            download_url.queue.put(url)
-        return 0
-
-    def pool_init(queue):
-        download_url.queue = queue
 
     queue = mp.Queue()
     pool = mp.Pool(processes, pool_init, [queue])
