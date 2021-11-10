@@ -1,5 +1,6 @@
 mushroom_images
 mushroom_images/*
+*.tar
 *.tar.gz
 !mushrooms.tsv.gz
 
