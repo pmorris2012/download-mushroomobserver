@@ -12,10 +12,13 @@ def validate(
     data = read_csv(tsv, sep="\t", header=0)
 
     drop_rows = []
+    counter = 0
     for index, row in data.iterrows():
         path = Path(save_dir, row['filename'])
         if not path.is_file():
+            counter += 1
             drop_rows.append(index)
+    print(counter)
             
     data = data.drop(labels=drop_rows, axis=0)
 
