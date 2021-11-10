@@ -53,7 +53,7 @@ def download(
 
         remaining = []
         while not queue.empty():
-            remaining.append(q.get())
+            remaining.append(queue.get())
         
         attempt += 1
 
