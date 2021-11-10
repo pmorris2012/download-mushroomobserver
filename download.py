@@ -22,7 +22,7 @@ def download(
     ):
     save_dir.mkdir(parents=True, exist_ok=True)
 
-    data = read_csv(tsv, sep="\t", header=True)
+    data = read_csv(tsv, sep="\t", header=0)
     urls = data["url"].tolist()
 
     pool = Pool(processes)
