@@ -23,7 +23,7 @@ def validate(
             
     data = data.drop(labels=drop_rows, axis=0)
 
-    data.to_csv(str(tsv), index=False, compression='gzip')
+    data.to_csv(str(tsv), sep="\t", index=False, compression='gzip')
 
 
 if __name__ == "__main__":
