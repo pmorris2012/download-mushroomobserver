@@ -7,12 +7,17 @@ from functools import partial
 from multiprocessing import Pool
 from pathlib import Path
 from typing import Optional
+from urllib.error import URLError
 from urllib.request import urlretrieve
 
 
 def download_url(url: str, save_dir: Path):
-    save_path = Path(save_dir, Path(url).name)
-    urlretrieve(url, str(save_path))
+    filename = Path(url).name
+    save_path = Path(save_dir, filename)
+    try:
+        urlretrieve(url, str(save_path))
+    except URLError as e:
+        print(filename, e.reason)
 
 
 def download(
