@@ -2,7 +2,7 @@
 
 A dataset of paired mushroom images and genus/species nomenclature.
 
-The full dataset (containing `mushrooms.tsv.gz` and `mushroom_images/`) can be downloaded from [Google Drive](https://drive.google.com/file/d/1RfjX5nEGJNoTEVqaThxumBlm3-75IJR1/view?usp=sharing).
+The full dataset (`mushroom_images/`) can be downloaded from [Google Drive](https://drive.google.com/file/d/1RfjX5nEGJNoTEVqaThxumBlm3-75IJR1/view?usp=sharing).
 
 A use for this dataset is finetuning [CLIP](https://openai.com/blog/clip/), a multimodal neural network pretrained on 400M image-text pairs, to pair mushroom images with text specifying a genus/species name. [Example Colab Notebook here](https://drive.google.com/file/d/1l5GS4_hnMvd9W4-JbqCGx3RZPeynCnh1/view?usp=sharing)
 
